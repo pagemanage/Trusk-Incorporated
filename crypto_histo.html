@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto — Multi-Exchange Histogram</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f4f3ef;
+  color: #1a1a1a;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  padding: 20px;
+}
+h1 {
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.sub { font-size: 10px; color: #888; margin-bottom: 14px; }
+
+.controls {
+display: flex;
+flex-wrap: wrap;
+gap: 5px;
+margin-bottom: 14px;
+align-items: center;
+}
+.controls label { font-size: 10px; color: #888; margin-right: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
+button {
+font-family: ‘Courier New’, monospace;
+font-size: 10px;
+font-weight: bold;
+background: #1a1a1a;
+color: #f4f3ef;
+border: none;
+padding: 3px 8px;
+cursor: pointer;
+letter-spacing: 0.06em;
+}
+button.inactive { background: #ccc; color: #666; }
+button:hover { background: #444; }
+
+.chart-scroll { overflow-x: auto; }
+.chart {
+display: flex;
+align-items: flex-end;
+gap: 4px;
+min-height: 220px;
+border-bottom: 1px solid #aaa;
+padding-bottom: 0;
+width: max-content;
+min-width: 100%;
+}
+.col {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-end;
+min-width: 52px;
+height: 220px;
+}
+.bar-wrap {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-end;
+width: 100%;
+height: 100%;
+}
+.count { font-size: 9px; color: #555; font-weight: bold; margin-bottom: 2px; }
+.bar {
+width: 100%;
+background: #1a1a1a;
+padding: 2px 1px;
+display: flex;
+flex-direction: column;
+gap: 1px;
+overflow: hidden;
+}
+.chip {
+font-size: 7.5px;
+font-weight: bold;
+padding: 1px 3px;
+line-height: 1.15;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: clip;
+cursor: default;
+letter-spacing: 0.02em;
+}
+/* exchange count brightness */
+.ex1 { background: #3a3a3a; color: #888; }
+.ex2 { background: #555; color: #bbb; }
+.ex3 { background: #888; color: #f0f0f0; }
+.ex4 { background: #d0d0d0; color: #111; }
+
+.year-row {
+display: flex;
+gap: 4px;
+width: max-content;
+min-width: 100%;
+margin-bottom: 16px;
+}
+.year-label {
+font-size: 9px;
+color: #888;
+text-align: center;
+min-width: 52px;
+padding-top: 3px;
+}
+
+/* legend */
+.legend {
+display: flex;
+flex-wrap: wrap;
+gap: 4px 16px;
+margin-bottom: 16px;
+align-items: center;
+}
+.legend-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #555; }
+.swatch { width: 16px; height: 10px; display: inline-block; }
+
+/* detail panel */
+.legend-groups {
+display: flex;
+flex-wrap: wrap;
+gap: 12px 24px;
+margin-top: 16px;
+border-top: 1px solid #ccc;
+padding-top: 12px;
+}
+.lg { }
+.lg-year { font-size: 9px; color: #888; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+.lg-chips { display: flex; flex-wrap: wrap; gap: 2px; }
+.lc {
+font-size: 9px; font-weight: bold;
+padding: 1px 5px;
+cursor: default;
+}
+
+.tooltip {
+position: fixed;
+background: #1a1a1a;
+color: #eee;
+font-size: 10px;
+padding: 7px 10px;
+pointer-events: none;
+z-index: 999;
+display: none;
+line-height: 1.7;
+max-width: 200px;
+}
+.tooltip.on { display: block; }
+.tooltip b { color: #aaa; font-size: 9px; display: block; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px; }
+</style>
+
+</head>
+<body>
+
+<h1>Crypto · Multi-Exchange · Launch Year Histogram</h1>
+<div class="sub">Revolut · Binance · Kraken · ~240 coins · brightness = exchange count</div>
+
+<div class="controls">
+  <label>filter</label>
+  <button onclick="setFilter('all')" id="btn-all">ALL</button>
+  <button onclick="setFilter('R')" id="btn-R" class="inactive">REVOLUT</button>
+  <button onclick="setFilter('B')" id="btn-B" class="inactive">BINANCE</button>
+  <button onclick="setFilter('K')" id="btn-K" class="inactive">KRAKEN</button>
+  <button onclick="setFilter('multi')" id="btn-multi" class="inactive">2+ EXCHANGES</button>
+  <button onclick="setFilter('all3')" id="btn-all3" class="inactive">ALL 3</button>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="swatch ex1"></span>1 exchange</div>
+  <div class="legend-item"><span class="swatch ex2"></span>2 exchanges</div>
+  <div class="legend-item"><span class="swatch ex3"></span>3 exchanges</div>
+</div>
+
+<div class="chart-scroll">
+  <div class="chart" id="chart"></div>
+  <div class="year-row" id="years"></div>
+</div>
+
+<div class="legend-groups" id="groups"></div>
+<div class="tooltip" id="tip"></div>
+
+<script>
+// ex: array of 'R','B','K'
+const coins = [
+  // 2009
+  {s:"BTC",  n:"Bitcoin",              y:2009, ex:['R','B','K']},
+  // 2011
+  {s:"LTC",  n:"Litecoin",             y:2011, ex:['R','B','K']},
+  // 2012
+  {s:"XRP",  n:"Ripple",               y:2012, ex:['R','B','K']},
+  // 2013
+  {s:"DOGE", n:"Dogecoin",             y:2013, ex:['R','B','K']},
+  // 2014
+  {s:"XMR",  n:"Monero",               y:2014, ex:['K']},
+  {s:"XLM",  n:"Stellar",              y:2014, ex:['R','B','K']},
+  {s:"DASH", n:"Dash",                 y:2014, ex:['R','B','K']},
+  // 2015
+  {s:"ETH",  n:"Ethereum",             y:2015, ex:['R','B','K']},
+  {s:"REP",  n:"Augur",                y:2015, ex:['K']},
+  // 2016
+  {s:"ETC",  n:"Ethereum Classic",     y:2016, ex:['R','B','K']},
+  {s:"ZEC",  n:"Zcash",                y:2016, ex:['B','K']},
+  {s:"NEO",  n:"NEO",                  y:2016, ex:['B','K']},
+  {s:"WAVES",n:"Waves",                y:2016, ex:['B','K']},
+  {s:"GAS",  n:"GAS",                  y:2016, ex:['B']},
+  // 2017
+  {s:"BNB",  n:"BNB",                  y:2017, ex:['B']},
+  {s:"BCH",  n:"Bitcoin Cash",         y:2017, ex:['R','B','K']},
+  {s:"ADA",  n:"Cardano",              y:2017, ex:['R','B','K']},
+  {s:"LINK", n:"Chainlink",            y:2017, ex:['R','B','K']},
+  {s:"MKR",  n:"Maker",                y:2017, ex:['R','B','K']},
+  {s:"BNT",  n:"Bancor",               y:2017, ex:['R','B','K']},
+  {s:"KNC",  n:"Kyber",                y:2017, ex:['R','B','K']},
+  {s:"LRC",  n:"Loopring",             y:2017, ex:['R','B','K']},
+  {s:"REN",  n:"Ren",                  y:2017, ex:['R','B','K']},
+  {s:"MLN",  n:"Enzyme",               y:2017, ex:['R','K']},
+  {s:"NMR",  n:"Numerai",              y:2017, ex:['R','B','K']},
+  {s:"STORJ",n:"Storj",                y:2017, ex:['R','B','K']},
+  {s:"LPT",  n:"Livepeer",             y:2017, ex:['R','B','K']},
+  {s:"ENJ",  n:"Enjin",                y:2017, ex:['R','B','K']},
+  {s:"MANA", n:"Decentraland",         y:2017, ex:['R','B','K']},
+  {s:"IDEX", n:"IDEX",                 y:2017, ex:['R','K']},
+  {s:"BAT",  n:"Basic Attn Token",     y:2017, ex:['R','B','K']},
+  {s:"ZRX",  n:"0x",                   y:2017, ex:['R','B','K']},
+  {s:"OMG",  n:"OMG Network",          y:2017, ex:['R','B','K']},
+  {s:"REQ",  n:"Request",              y:2017, ex:['R','K']},
+  {s:"TRX",  n:"Tron",                 y:2017, ex:['B','K']},
+  {s:"ICX",  n:"ICON",                 y:2017, ex:['B','K']},
+  {s:"ONT",  n:"Ontology",             y:2017, ex:['B','K']},
+  {s:"IOTA", n:"IOTA",                 y:2017, ex:['B','K']},
+  {s:"MTL",  n:"Metal",                y:2017, ex:['B']},
+  {s:"NULS", n:"NULS",                 y:2017, ex:['B']},
+  {s:"VET",  n:"VeChain",              y:2017, ex:['B','K']},
+  {s:"DENT", n:"Dent",                 y:2017, ex:['B']},
+  {s:"CVC",  n:"Civic",                y:2017, ex:['B','K']},
+  // 2018
+  {s:"SNX",  n:"Synthetix",            y:2018, ex:['R','B','K']},
+  {s:"ANKR", n:"Ankr",                 y:2018, ex:['R','B','K']},
+  {s:"NKN",  n:"NKN",                  y:2018, ex:['R','B','K']},
+  {s:"QNT",  n:"Quant",                y:2018, ex:['R','B','K']},
+  {s:"SAND", n:"The Sandbox",          y:2018, ex:['R','B','K']},
+  {s:"CHZ",  n:"Chiliz",               y:2018, ex:['R','B','K']},
+  {s:"BLZ",  n:"Bluzelle",             y:2018, ex:['R','B','K']},
+  {s:"CRO",  n:"Cronos",               y:2018, ex:['R','B','K']},
+  {s:"FTM",  n:"Fantom",               y:2018, ex:['B','K']},
+  {s:"ZIL",  n:"Zilliqa",              y:2018, ex:['B','K']},
+  {s:"HOT",  n:"Holo",                 y:2018, ex:['B','K']},
+  {s:"DUSK", n:"Dusk Network",         y:2018, ex:['B','K']},
+  {s:"RVN",  n:"Ravencoin",            y:2018, ex:['B','K']},
+  {s:"THETA",n:"Theta Network",        y:2018, ex:['B','K']},
+  {s:"STMX", n:"StormX",               y:2018, ex:['B','K']},
+  {s:"WAN",  n:"Wanchain",             y:2018, ex:['B']},
+  {s:"IOST", n:"IOST",                 y:2018, ex:['B']},
+  {s:"LOOM", n:"Loom",                 y:2018, ex:['B','K']},
+  {s:"CELR", n:"Celer Network",        y:2018, ex:['B','K']},
+  {s:"ARPA", n:"ARPA Chain",           y:2018, ex:['B','K']},
+  {s:"KEY",  n:"SelfKey",              y:2018, ex:['B']},
+  {s:"AUDIO",n:"Audius",               y:2018, ex:['B','K']},
+  // 2019
+  {s:"ATOM", n:"Cosmos",               y:2019, ex:['R','B','K']},
+  {s:"ALGO", n:"Algorand",             y:2019, ex:['R','B','K']},
+  {s:"BAND", n:"Band Protocol",        y:2019, ex:['R','B','K']},
+  {s:"TRB",  n:"Tellor",               y:2019, ex:['R','B','K']},
+  {s:"FET",  n:"Fetch.ai",             y:2019, ex:['R','B','K']},
+  {s:"GALA", n:"Gala",                 y:2019, ex:['R','B','K']},
+  {s:"OXT",  n:"Orchid",               y:2019, ex:['R','K']},
+  {s:"COTI", n:"COTI",                 y:2019, ex:['R','B','K']},
+  {s:"MATIC",n:"Polygon",              y:2019, ex:['R','B','K']},
+  {s:"OCEAN",n:"Ocean Protocol",       y:2019, ex:['B','K']},
+  {s:"HBAR", n:"Hedera",               y:2019, ex:['B','K']},
+  {s:"KLAY", n:"Klaytn",               y:2019, ex:['B','K']},
+  {s:"CKB",  n:"Nervos",               y:2019, ex:['B','K']},
+  {s:"BTT",  n:"BitTorrent",           y:2019, ex:['B']},
+  {s:"WIN",  n:"WINkLink",             y:2019, ex:['B']},
+  {s:"RUNE", n:"THORChain",            y:2019, ex:['B','K']},
+  {s:"FOR",  n:"ForTube",              y:2019, ex:['B']},
+  {s:"TFUEL",n:"Theta Fuel",           y:2019, ex:['B','K']},
+  // 2020
+  {s:"DOT",  n:"Polkadot",             y:2020, ex:['R','B','K']},
+  {s:"AVAX", n:"Avalanche",            y:2020, ex:['R','B','K']},
+  {s:"SOL",  n:"Solana",               y:2020, ex:['R','B','K']},
+  {s:"EGLD", n:"MultiversX",           y:2020, ex:['R','B','K']},
+  {s:"FLOW", n:"Flow",                 y:2020, ex:['R','B','K']},
+  {s:"CELO", n:"Celo",                 y:2020, ex:['R','B','K']},
+  {s:"SKL",  n:"SKALE",                y:2020, ex:['R','B','K']},
+  {s:"AAVE", n:"Aave",                 y:2020, ex:['R','B','K']},
+  {s:"UNI",  n:"Uniswap",              y:2020, ex:['R','B','K']},
+  {s:"SUSHI",n:"SushiSwap",            y:2020, ex:['R','B','K']},
+  {s:"COMP", n:"Compound",             y:2020, ex:['R','B','K']},
+  {s:"CRV",  n:"Curve DAO",            y:2020, ex:['R','B','K']},
+  {s:"BAL",  n:"Balancer",             y:2020, ex:['R','B','K']},
+  {s:"YFI",  n:"yearn.finance",        y:2020, ex:['R','B','K']},
+  {s:"1INCH",n:"1inch",                y:2020, ex:['R','B','K']},
+  {s:"UMA",  n:"UMA",                  y:2020, ex:['R','B','K']},
+  {s:"PERP", n:"Perpetual",            y:2020, ex:['R','B','K']},
+  {s:"MIR",  n:"Mirror Protocol",      y:2020, ex:['R','B']},
+  {s:"UNFI", n:"Unifi Protocol",       y:2020, ex:['R','B','K']},
+  {s:"GRT",  n:"The Graph",            y:2020, ex:['R','B','K']},
+  {s:"FIL",  n:"Filecoin",             y:2020, ex:['R','B','K']},
+  {s:"RNDR", n:"Render",               y:2020, ex:['R','B','K']},
+  {s:"CTSI", n:"Cartesi",              y:2020, ex:['R','B','K']},
+  {s:"NU",   n:"NuCypher",             y:2020, ex:['R','K']},
+  {s:"KEEP", n:"Keep Network",         y:2020, ex:['R','K']},
+  {s:"ACH",  n:"Alchemy Pay",          y:2020, ex:['R','B','K']},
+  {s:"AMP",  n:"Amp",                  y:2020, ex:['R','K']},
+  {s:"OGN",  n:"Origin Protocol",      y:2020, ex:['R','B','K']},
+  {s:"SHIB", n:"Shiba Inu",            y:2020, ex:['R','B','K']},
+  {s:"AXS",  n:"Axie Infinity",        y:2020, ex:['R','B','K']},
+  {s:"BOND", n:"BarnBridge",           y:2020, ex:['R','B','K']},
+  {s:"NEAR", n:"NEAR Protocol",        y:2020, ex:['B','K']},
+  {s:"INJ",  n:"Injective",            y:2020, ex:['B','K']},
+  {s:"ROSE", n:"Oasis",                y:2020, ex:['B','K']},
+  {s:"CFX",  n:"Conflux",              y:2020, ex:['B','K']},
+  {s:"HIVE", n:"Hive",                 y:2020, ex:['B','K']},
+  {s:"SUN",  n:"Sun Token",            y:2020, ex:['B']},
+  {s:"JST",  n:"JUST",                 y:2020, ex:['B']},
+  {s:"BAKE", n:"BakerySwap",           y:2020, ex:['B']},
+  {s:"XVS",  n:"Venus",                y:2020, ex:['B','K']},
+  {s:"BEL",  n:"Bella Protocol",       y:2020, ex:['B']},
+  {s:"REEF", n:"Reef",                 y:2020, ex:['B','K']},
+  {s:"LINA", n:"Linear Finance",       y:2020, ex:['B','K']},
+  {s:"DODO", n:"DODO",                 y:2020, ex:['B','K']},
+  {s:"CVX",  n:"Convex Finance",       y:2020, ex:['B','K']},
+  // 2021
+  {s:"ICP",  n:"Internet Computer",    y:2021, ex:['R','B','K']},
+  {s:"MINA", n:"Mina Protocol",        y:2021, ex:['R','B','K']},
+  {s:"IMX",  n:"Immutable X",          y:2021, ex:['R','B','K']},
+  {s:"ENS",  n:"Ethereum Name Svc",    y:2021, ex:['R','B','K']},
+  {s:"RAD",  n:"Radicle",              y:2021, ex:['R','K']},
+  {s:"SPELL",n:"Spell Token",          y:2021, ex:['R','B']},
+  {s:"BICO", n:"Biconomy",             y:2021, ex:['R','B','K']},
+  {s:"CLV",  n:"Clover Finance",       y:2021, ex:['R','B','K']},
+  {s:"FIDA", n:"Bonfida",              y:2021, ex:['R','B','K']},
+  {s:"GODS", n:"Gods Unchained",       y:2021, ex:['R','K']},
+  {s:"SUPER",n:"SuperFarm",            y:2021, ex:['R','B','K']},
+  {s:"MASK", n:"Mask Network",         y:2021, ex:['R','B','K']},
+  {s:"FORTH",n:"Ampleforth Gov",       y:2021, ex:['R','B','K']},
+  {s:"JASMY",n:"JasmyCoin",            y:2021, ex:['R','B','K']},
+  {s:"FLOKI",n:"Floki",                y:2021, ex:['B','K']},
+  {s:"TLM",  n:"Alien Worlds",         y:2021, ex:['B','K']},
+  {s:"ALICE",n:"My Neighbor Alice",    y:2021, ex:['B','K']},
+  {s:"RPL",  n:"Rocket Pool",          y:2021, ex:['B','K']},
+  {s:"LDO",  n:"Lido DAO",             y:2021, ex:['B','K']},
+  {s:"DYDX", n:"dYdX",                 y:2021, ex:['B','K']},
+  {s:"OSMO", n:"Osmosis",              y:2021, ex:['K']},
+  {s:"QUICK",n:"QuickSwap",            y:2021, ex:['B','K']},
+  {s:"SFP",  n:"SafePal",              y:2021, ex:['B']},
+  {s:"MBOX", n:"MOBOX",                y:2021, ex:['B']},
+  {s:"EPS",  n:"Ellipsis",             y:2021, ex:['B']},
+  {s:"STG",  n:"Stargate Finance",     y:2021, ex:['B','K']},
+  {s:"GLMR", n:"Moonbeam",             y:2021, ex:['B','K']},
+  {s:"MOVR", n:"Moonriver",            y:2021, ex:['K']},
+  {s:"ASTR", n:"Astar",                y:2021, ex:['K']},
+  {s:"BADGER",n:"Badger DAO",          y:2021, ex:['K']},
+  {s:"AUDIO",n:"Audius",               y:2021, ex:['B','K']},
+  {s:"ALCX", n:"Alchemix",             y:2021, ex:['K']},
+  // 2022
+  {s:"APE",  n:"ApeCoin",              y:2022, ex:['R','B','K']},
+  {s:"GST",  n:"Green Satoshi",        y:2022, ex:['R','B']},
+  {s:"GMT",  n:"STEPN",                y:2022, ex:['R','B','K']},
+  {s:"OP",   n:"Optimism",             y:2022, ex:['B','K']},
+  {s:"APT",  n:"Aptos",                y:2022, ex:['B','K']},
+  {s:"BONK", n:"Bonk",                 y:2022, ex:['B','K']},
+  {s:"LUNC", n:"Terra Classic",        y:2022, ex:['B','K']},
+  {s:"HOOK", n:"Hooked Protocol",      y:2022, ex:['B']},
+  {s:"FXS",  n:"Frax Share",           y:2022, ex:['B','K']},
+  // 2023
+  {s:"ARB",  n:"Arbitrum",             y:2023, ex:['B','K']},
+  {s:"PEPE", n:"Pepe",                 y:2023, ex:['B','K']},
+  {s:"WIF",  n:"dogwifhat",            y:2023, ex:['B','K']},
+  {s:"SUI",  n:"Sui",                  y:2023, ex:['B','K']},
+  {s:"TIA",  n:"Celestia",             y:2023, ex:['B','K']},
+  {s:"SEI",  n:"Sei",                  y:2023, ex:['B','K']},
+  {s:"PYTH", n:"Pyth Network",         y:2023, ex:['B','K']},
+  {s:"JTO",  n:"Jito",                 y:2023, ex:['B','K']},
+  {s:"WLD",  n:"Worldcoin",            y:2023, ex:['B','K']},
+  {s:"BLUR", n:"Blur",                 y:2023, ex:['B','K']},
+  {s:"ORDI", n:"Ordinals",             y:2023, ex:['B','K']},
+  {s:"MANTA",n:"Manta Network",        y:2023, ex:['B','K']},
+  // 2024
+  {s:"STRK", n:"Starknet",             y:2024, ex:['B','K']},
+  {s:"BOME", n:"Book of Meme",         y:2024, ex:['B','K']},
+  {s:"NOT",  n:"Notcoin",              y:2024, ex:['B','K']},
+  {s:"ZK",   n:"ZKsync",               y:2024, ex:['B','K']},
+  {s:"EIGEN",n:"EigenLayer",           y:2024, ex:['B','K']},
+  {s:"CATI", n:"Catizen",              y:2024, ex:['B','K']},
+  // 2025
+  {s:"BERA", n:"Berachain",            y:2025, ex:['K']},
+  {s:"LAYER",n:"Solayer",              y:2025, ex:['B','K']},
+];
+
+let currentFilter = 'all';
+
+function exClass(ex) {
+  const n = ex.length;
+  if (n >= 3) return 'ex3';
+  if (n === 2) return 'ex2';
+  return 'ex1';
+}
+
+function visible(coin) {
+  if (currentFilter === 'all') return true;
+  if (currentFilter === 'R') return coin.ex.includes('R');
+  if (currentFilter === 'B') return coin.ex.includes('B');
+  if (currentFilter === 'K') return coin.ex.includes('K');
+  if (currentFilter === 'multi') return coin.ex.length >= 2;
+  if (currentFilter === 'all3') return coin.ex.length >= 3;
+  return true;
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  ['all','R','B','K','multi','all3'].forEach(x => {
+    document.getElementById('btn-'+x).className = x === f ? '' : 'inactive';
+  });
+  render();
+}
+
+function render() {
+  const filtered = coins.filter(visible);
+  const years = [...new Set(filtered.map(c=>c.y))].sort((a,b)=>a-b);
+
+  const maxCount = Math.max(...years.map(y => filtered.filter(c=>c.y===y).length));
+
+  const chart = document.getElementById('chart');
+  const yearsEl = document.getElementById('years');
+  const groups = document.getElementById('groups');
+  chart.innerHTML = '';
+  yearsEl.innerHTML = '';
+  groups.innerHTML = '';
+
+  years.forEach(y => {
+    const group = filtered.filter(c=>c.y===y);
+    const pct = group.length / maxCount;
+    const barH = Math.max(pct * 200, 6);
+
+    const col = document.createElement('div');
+    col.className = 'col';
+
+    const bw = document.createElement('div');
+    bw.className = 'bar-wrap';
+
+    const cnt = document.createElement('div');
+    cnt.className = 'count';
+    cnt.textContent = group.length;
+
+    const bar = document.createElement('div');
+    bar.className = 'bar';
+    bar.style.height = barH + 'px';
+
+    group.forEach(c => {
+      const chip = document.createElement('div');
+      chip.className = 'chip ' + exClass(c.ex);
+      chip.textContent = c.s;
+      chip.addEventListener('mousemove', e => {
+        const tip = document.getElementById('tip');
+        tip.className = 'tooltip on';
+        tip.innerHTML = `<b>${c.s} · ${y}</b>${c.n}<br>${c.ex.join(' · ')}`;
+        tip.style.left = (e.clientX+12)+'px';
+        tip.style.top = (e.clientY+12)+'px';
+      });
+      chip.addEventListener('mouseleave', () => {
+        document.getElementById('tip').className = 'tooltip';
+      });
+      bar.appendChild(chip);
+    });
+
+    bw.appendChild(cnt);
+    bw.appendChild(bar);
+    col.appendChild(bw);
+    chart.appendChild(col);
+
+    const yl = document.createElement('div');
+    yl.className = 'year-label';
+    yl.textContent = y;
+    yearsEl.appendChild(yl);
+
+    // legend group
+    const lg = document.createElement('div');
+    lg.className = 'lg';
+    lg.innerHTML = `<div class="lg-year">${y}</div><div class="lg-chips">${
+      group.map(c => `<span class="lc ${exClass(c.ex)}" title="${c.n} · ${c.ex.join(', ')}">${c.s}</span>`).join('')
+    }</div>`;
+    groups.appendChild(lg);
+  });
+}
+
+render();
+</script>
+
+</body>
+</html>

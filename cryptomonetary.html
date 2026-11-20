@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revolut Crypto</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background: #1a1a1a;
+color: #d0d0d0;
+font-family: ‘Courier New’, Courier, monospace;
+font-size: 11px;
+padding: 18px;
+line-height: 1.3;
+}
+
+h1 {
+font-size: 11px;
+font-weight: normal;
+color: #888;
+border-bottom: 1px solid #333;
+padding-bottom: 6px;
+margin-bottom: 14px;
+letter-spacing: 0.05em;
+}
+
+h1 span { color: #d0d0d0; }
+
+#search {
+background: #111;
+border: 1px solid #444;
+color: #d0d0d0;
+font-family: ‘Courier New’, monospace;
+font-size: 11px;
+padding: 4px 7px;
+outline: none;
+width: 180px;
+margin-bottom: 16px;
+}
+#search:focus { border-color: #888; }
+
+.section { margin-bottom: 18px; }
+
+.section-label {
+font-size: 10px;
+color: #666;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+margin-bottom: 6px;
+padding-left: 2px;
+}
+
+.coins {
+display: flex;
+flex-wrap: wrap;
+gap: 4px;
+}
+
+.coin {
+display: inline-block;
+border: 1px solid #3a3a3a;
+background: #222;
+padding: 3px 6px;
+font-size: 11px;
+color: #c8c8c8;
+text-decoration: none;
+cursor: pointer;
+white-space: nowrap;
+transition: background 0.08s, border-color 0.08s, color 0.08s;
+user-select: none;
+}
+
+.coin:hover {
+background: #2e2e2e;
+border-color: #888;
+color: #fff;
+}
+
+.coin .sym {
+color: #e8e8e8;
+font-weight: bold;
+}
+
+.coin .nm {
+color: #666;
+margin-left: 4px;
+font-size: 10px;
+}
+
+.hidden { display: none !important; }
+
+footer {
+margin-top: 20px;
+border-top: 1px solid #2a2a2a;
+padding-top: 8px;
+color: #444;
+font-size: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>[ <span>revolut crypto list</span> ] — 95 tokens — <input type="text" id="search" placeholder="filter..." oninput="filter(this.value)"></h1>
+
+<div id="main"></div>
+
+<footer>click any box to open official site &nbsp;·&nbsp; data: oct 2025 &nbsp;·&nbsp; not financial advice</footer>
+
+<script>
+const groups = [
+  {
+    label: "Layer 1 / Base chains",
+    coins: [
+      { s:"BTC",  n:"Bitcoin",            u:"bitcoin.org" },
+      { s:"ETH",  n:"Ethereum",           u:"ethereum.org" },
+      { s:"SOL",  n:"Solana",             u:"solana.com" },
+      { s:"ADA",  n:"Cardano",            u:"cardano.org" },
+      { s:"XRP",  n:"Ripple",             u:"ripple.com" },
+      { s:"DOT",  n:"Polkadot",           u:"polkadot.network" },
+      { s:"AVAX", n:"Avalanche",          u:"avax.network" },
+      { s:"ATOM", n:"Cosmos",             u:"cosmos.network" },
+      { s:"ALGO", n:"Algorand",           u:"algorand.com" },
+      { s:"EGLD", n:"MultiversX",         u:"multiversx.com" },
+      { s:"FLOW", n:"Flow",               u:"flow.com" },
+      { s:"ICP",  n:"Internet Computer",  u:"internetcomputer.org" },
+      { s:"MINA", n:"Mina Protocol",      u:"minaprotocol.com" },
+      { s:"EOS",  n:"EOS",                u:"eos.io" },
+      { s:"XTZ",  n:"Tezos",             u:"tezos.com" },
+      { s:"XLM",  n:"Stellar",            u:"stellar.org" },
+      { s:"CELO", n:"Celo",               u:"celo.org" },
+    ]
+  },
+  {
+    label: "Layer 2 / Scaling",
+    coins: [
+      { s:"MATIC", n:"Polygon",       u:"polygon.technology" },
+      { s:"IMX",   n:"Immutable X",   u:"immutable.com" },
+      { s:"LRC",   n:"Loopring",      u:"loopring.org" },
+      { s:"SKL",   n:"SKALE",         u:"skale.network" },
+    ]
+  },
+  {
+    label: "DeFi",
+    coins: [
+      { s:"AAVE",  n:"Aave",           u:"aave.com" },
+      { s:"UNI",   n:"Uniswap",        u:"uniswap.org" },
+      { s:"SUSHI", n:"SushiSwap",      u:"sushi.com" },
+      { s:"COMP",  n:"Compound",       u:"compound.finance" },
+      { s:"MKR",   n:"Maker",          u:"makerdao.com" },
+      { s:"CRV",   n:"Curve",          u:"curve.fi" },
+      { s:"SNX",   n:"Synthetix",      u:"synthetix.io" },
+      { s:"BAL",   n:"Balancer",       u:"balancer.fi" },
+      { s:"YFI",   n:"yearn.finance",  u:"yearn.finance" },
+      { s:"1INCH", n:"1inch",          u:"1inch.io" },
+      { s:"BNT",   n:"Bancor",         u:"bancor.network" },
+      { s:"KNC",   n:"Kyber",          u:"kyber.network" },
+      { s:"UMA",   n:"UMA",            u:"uma.xyz" },
+      { s:"PERP",  n:"Perpetual",      u:"perp.com" },
+      { s:"MLN",   n:"Enzyme",         u:"enzyme.finance" },
+      { s:"MIR",   n:"Mirror",         u:"mirror.finance" },
+      { s:"SPELL", n:"Abracadabra",    u:"abracadabra.money" },
+      { s:"UNFI",  n:"Unifi",          u:"unifiprotocol.com" },
+    ]
+  },
+  {
+    label: "Oracles / Data",
+    coins: [
+      { s:"LINK",  n:"Chainlink",   u:"chain.link" },
+      { s:"BAND",  n:"Band",        u:"bandprotocol.com" },
+      { s:"GRT",   n:"The Graph",   u:"thegraph.com" },
+      { s:"TRB",   n:"Tellor",      u:"tellor.io" },
+      { s:"NMR",   n:"Numerai",     u:"numer.ai" },
+    ]
+  },
+  {
+    label: "Infrastructure / Web3",
+    coins: [
+      { s:"FIL",   n:"Filecoin",    u:"filecoin.io" },
+      { s:"STORJ", n:"Storj",       u:"storj.io" },
+      { s:"ANKR",  n:"Ankr",        u:"ankr.com" },
+      { s:"NKN",   n:"NKN",         u:"nkn.org" },
+      { s:"RLC",   n:"iExec",       u:"iex.ec" },
+      { s:"LPT",   n:"Livepeer",    u:"livepeer.org" },
+      { s:"QNT",   n:"Quant",       u:"quant.network" },
+      { s:"FET",   n:"Fetch.ai",    u:"fetch.ai" },
+      { s:"RNDR",  n:"Render",      u:"rendernetwork.com" },
+      { s:"CTSI",  n:"Cartesi",     u:"cartesi.io" },
+      { s:"BLZ",   n:"Bluzelle",    u:"bluzelle.com" },
+      { s:"OXT",   n:"Orchid",      u:"orchid.com" },
+      { s:"ENS",   n:"ENS",         u:"ens.domains" },
+      { s:"RAD",   n:"Radicle",     u:"radicle.xyz" },
+      { s:"NU",    n:"NuCypher",    u:"nucypher.com" },
+      { s:"KEEP",  n:"Keep",        u:"keep.network" },
+      { s:"REN",   n:"Ren",         u:"renproject.io" },
+      { s:"BICO",  n:"Biconomy",    u:"biconomy.io" },
+      { s:"CLV",   n:"Clover",      u:"clv.org" },
+      { s:"ACH",   n:"AlchemyPay",  u:"alchemypay.org" },
+      { s:"FIDA",  n:"Bonfida",     u:"bonfida.org" },
+    ]
+  },
+  {
+    label: "Gaming / NFT / Metaverse",
+    coins: [
+      { s:"AXS",   n:"Axie",        u:"axieinfinity.com" },
+      { s:"ENJ",   n:"Enjin",       u:"enjin.io" },
+      { s:"MANA",  n:"Decentraland",u:"decentraland.org" },
+      { s:"SAND",  n:"Sandbox",     u:"sandbox.game" },
+      { s:"GALA",  n:"Gala",        u:"gala.games" },
+      { s:"GODS",  n:"Gods Unchained",u:"godsunchained.com" },
+      { s:"APE",   n:"ApeCoin",     u:"apecoin.com" },
+      { s:"CHZ",   n:"Chiliz",      u:"chiliz.com" },
+      { s:"IDEX",  n:"IDEX",        u:"idex.io" },
+      { s:"SUPER", n:"SuperFarm",   u:"superfarm.com" },
+    ]
+  },
+  {
+    label: "Move-to-Earn",
+    coins: [
+      { s:"GST",  n:"Green Satoshi", u:"stepn.com" },
+      { s:"GMT",  n:"STEPN",         u:"stepn.com" },
+    ]
+  },
+  {
+    label: "Meme / Community",
+    coins: [
+      { s:"DOGE",  n:"Dogecoin",  u:"dogecoin.com" },
+      { s:"SHIB",  n:"Shiba Inu", u:"shibatoken.com" },
+    ]
+  },
+  {
+    label: "Privacy / Payments",
+    coins: [
+      { s:"LTC",  n:"Litecoin",      u:"litecoin.org" },
+      { s:"BCH",  n:"Bitcoin Cash",  u:"bitcoincash.org" },
+      { s:"ETC",  n:"Ethereum Classic",u:"ethereumclassic.org" },
+      { s:"DASH", n:"Dash",          u:"dash.org" },
+      { s:"CRO",  n:"Cronos",        u:"cronos.org" },
+      { s:"AMP",  n:"Amp",           u:"amptoken.org" },
+      { s:"COTI", n:"COTI",          u:"coti.io" },
+      { s:"REQ",  n:"Request",       u:"request.network" },
+    ]
+  },
+  {
+    label: "Governance / DAO",
+    coins: [
+      { s:"ZRX",   n:"0x",          u:"0x.org" },
+      { s:"BAT",   n:"BAT",         u:"basicattentiontoken.org" },
+      { s:"OGN",   n:"Origin",      u:"originprotocol.com" },
+      { s:"OMG",   n:"OMG",         u:"omg.network" },
+      { s:"MASK",  n:"Mask",        u:"mask.io" },
+      { s:"FORTH", n:"Ampleforth",  u:"ampleforth.org" },
+      { s:"BOND",  n:"BarnBridge",  u:"barnbridge.com" },
+      { s:"JASMY", n:"Jasmy",       u:"jasmy.co.jp" },
+    ]
+  },
+];
+
+function render(q) {
+  q = (q||'').toLowerCase();
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  groups.forEach(g => {
+    const filtered = g.coins.filter(c =>
+      !q || c.s.toLowerCase().includes(q) || c.n.toLowerCase().includes(q)
+    );
+    if (!filtered.length) return;
+    const sec = document.createElement('div');
+    sec.className = 'section';
+    sec.innerHTML = `<div class="section-label">${g.label}</div><div class="coins">${
+      filtered.map(c => `<a class="coin" href="https://${c.u}" target="_blank" rel="noopener" title="${c.u}"><span class="sym">${c.s}</span><span class="nm">${c.n}</span></a>`).join('')
+    }</div>`;
+    main.appendChild(sec);
+  });
+}
+
+render('');
+function filter(v) { render(v); }
+</script>
+
+</body>
+</html>

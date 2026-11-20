@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { 
+    font-family: 'Courier New', monospace; 
+    margin: 20px; 
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: #00ff00; 
+}
+.container { max-width: 100%; overflow-x: auto; }
+h2 { 
+    color: #ff6b6b; 
+    font-size: 18px; 
+    text-transform: uppercase; 
+    letter-spacing: 3px;
+    border-bottom: 2px solid #ff6b6b;
+    padding-bottom: 8px;
+    margin-top: 30px;
+}
+h3 { 
+    color: #4ecdc4; 
+    font-size: 12px; 
+    font-style: italic;
+    margin: 5px 0;
+}
+table { 
+    border-collapse: collapse; 
+    font-size: 8px; 
+    margin: 10px 0;
+    background: rgba(0,0,0,0.3);
+}
+td, th { 
+    padding: 1px 3px; 
+    border: 1px solid #333; 
+}
+th { 
+    background: #2a2a2a; 
+    font-weight: bold; 
+    font-size: 7px;
+    color: #ffe66d;
+}
+.tri { color: #ff6b6b; }
+.sq { color: #4ecdc4; }
+.pent { color: #ffe66d; }
+.hex { color: #a8dadc; }
+.even { color: #00ff00; }
+.fib { color: #ff9ff3; }
+.prime { color: #f54291; }
+.legend { 
+    font-size: 8px; 
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(0,0,0,0.5);
+    border-left: 3px solid #ff6b6b;
+}
+.section-note {
+    font-size: 9px;
+    color: #a8dadc;
+    font-style: italic;
+    margin: 8px 0;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1 style="color: #ff6b6b; text-align: center; font-size: 24px; letter-spacing: 5px;">
+EUCLIDEAN FIREBIRD SUITE
+</h1>
+<p style="text-align: center; font-size: 10px; color: #4ecdc4;">
+Inspired by Stravinsky's melodic variations & orchestral transformation techniques
+</p>
+
+<!-- BANK A: INTRODUCTION & ENCHANTED GARDEN -->
+<h2>BANK A: Introduction & Enchanted Garden</h2>
+<h3>"Low mysterious ostinato rising to supernatural brilliance"</h3>
+<p class="section-note">Building from sparse to complex - polymorphic layering</p>
+<table>
+<tr>
+<th>Pat</th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th><th>T8</th>
+<th>T9</th><th>T10</th><th>T11</th><th>T12</th><th>T13</th><th>T14</th><th>T15</th><th>T16</th><th>PL</th>
+</tr>
+<tr><td>P1</td><td class="tri">1/8/0</td><td class="sq">1/5/0</td><td class="pent">1/7/0</td><td class="hex">1/11/0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P2</td><td class="tri">1/8/0</td><td class="sq">1/5/1</td><td class="pent">2/13/0</td><td class="hex">3/17/1</td><td class="fib">1/13/0</td><td class="fib">2/21/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P3</td><td class="tri">3/15/1</td><td class="sq">4/16/2</td><td class="pent">5/17/1</td><td class="hex">6/18/2</td><td class="fib">3/21/1</td><td class="fib">5/34/2</td><td class="prime">3/23/0</td><td class="prime">5/29/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P4</td><td class="tri">6/21/2</td><td class="sq">9/25/3</td><td class="pent">12/29/2</td><td class="hex">15/33/3</td><td class="fib">8/55/2</td><td class="fib">13/89/3</td><td class="prime">7/31/1</td><td class="prime">11/37/2</td><td class="even">4/8/0</td><td class="even">6/12/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P5</td><td class="tri">10/28/3</td><td class="sq">16/36/4</td><td class="pent">22/41/3</td><td class="hex">28/48/4</td><td class="fib">13/89/3</td><td class="fib">21/120/4</td><td class="prime">13/41/2</td><td class="prime">17/43/3</td><td class="even">8/16/1</td><td class="even">12/24/2</td><td class="even">15/30/0</td><td class="even">20/40/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P6</td><td class="tri">15/36/4</td><td class="sq">25/49/5</td><td class="pent">35/53/4</td><td class="hex">45/63/5</td><td class="fib">21/120/4</td><td class="fib">34/120/5</td><td class="prime">19/47/3</td><td class="prime">23/53/4</td><td class="even">16/32/2</td><td class="even">24/48/3</td><td class="even">30/60/1</td><td class="even">40/80/2</td><td class="even">8/24/0</td><td class="even">12/36/1</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P7</td><td class="tri">21/45/5</td><td class="sq">36/64/6</td><td class="pent">51/67/5</td><td class="hex">66/81/6</td><td class="fib">34/120/5</td><td class="fib">55/120/6</td><td class="prime">29/59/4</td><td class="prime">31/61/5</td><td class="even">24/48/3</td><td class="even">36/72/4</td><td class="even">45/90/2</td><td class="even">60/120/3</td><td class="even">16/48/1</td><td class="even">24/72/2</td><td class="even">10/30/0</td><td class="even">15/45/1</td><td>120</td></tr>
+<tr><td>P8</td><td class="tri">28/55/6</td><td class="sq">49/81/7</td><td class="pent">70/83/6</td><td class="hex">91/99/7</td><td class="fib">55/120/6</td><td class="fib">89/120/7</td><td class="prime">37/67/5</td><td class="prime">41/71/6</td><td class="even">32/64/4</td><td class="even">48/96/5</td><td class="even">60/120/3</td><td class="even">80/120/4</td><td class="even">24/72/2</td><td class="even">36/108/3</td><td class="even">20/60/1</td><td class="even">30/90/2</td><td>120</td></tr>
+
+<tr><td colspan="18" style="background: #1a1a2e; height: 3px;"></td></tr>
+<tr><td>P9</td><td class="tri">36/66/7</td><td class="sq">64/100/8</td><td class="pent">92/101/7</td><td class="hex">120/120/8</td><td class="fib">89/120/7</td><td class="fib">120/120/8</td><td class="prime">43/73/6</td><td class="prime">47/79/7</td><td class="even">40/80/5</td><td class="even">60/120/6</td><td class="even">75/120/4</td><td class="even">100/120/5</td><td class="even">32/96/3</td><td class="even">48/120/4</td><td class="even">30/90/2</td><td class="even">45/120/3</td><td>120</td></tr>
+<tr><td>P10</td><td class="tri">45/78/8</td><td class="sq">81/121/9</td><td class="pent">117/120/8</td><td class="hex">120/120/9</td><td class="fib">120/120/8</td><td class="fib">120/120/9</td><td class="prime">53/83/7</td><td class="prime">59/89/8</td><td class="even">48/96/6</td><td class="even">72/120/7</td><td class="even">90/120/5</td><td class="even">120/120/6</td><td class="even">40/120/4</td><td class="even">60/120/5</td><td class="even">40/120/3</td><td class="even">60/120/4</td><td>120</td></tr>
+<tr><td>P11</td><td class="tri">55/91/9</td><td class="sq">100/120/10</td><td class="pent">120/120/9</td><td class="hex">120/120/10</td><td class="fib">120/120/9</td><td class="fib">117/120/10</td><td class="prime">61/97/8</td><td class="prime">67/101/9</td><td class="even">56/112/7</td><td class="even">84/120/8</td><td class="even">105/120/6</td><td class="even">120/120/7</td><td class="even">48/120/5</td><td class="even">72/120/6</td><td class="even">50/120/4</td><td class="even">75/120/5</td><td>120</td></tr>
+<tr><td>P12</td><td class="tri">66/105/10</td><td class="sq">117/120/11</td><td class="pent">120/120/10</td><td class="hex">117/120/11</td><td class="fib">117/120/10</td><td class="fib">100/120/11</td><td class="prime">71/103/9</td><td class="prime">73/107/10</td><td class="even">64/120/8</td><td class="even">96/120/9</td><td class="even">120/120/7</td><td class="even">115/120/8</td><td class="even">56/120/6</td><td class="even">84/120/7</td><td class="even">60/120/5</td><td class="even">90/120/6</td><td>120</td></tr>
+<tr><td>P13</td><td class="tri">78/120/11</td><td class="sq">100/120/0</td><td class="pent">117/120/11</td><td class="hex">100/120/0</td><td class="fib">100/120/11</td><td class="fib">81/120/0</td><td class="prime">79/109/10</td><td class="prime">83/113/11</td><td class="even">72/120/9</td><td class="even">108/120/10</td><td class="even">115/120/8</td><td class="even">100/120/9</td><td class="even">64/120/7</td><td class="even">96/120/8</td><td class="even">70/120/6</td><td class="even">105/120/7</td><td>120</td></tr>
+<tr><td>P14</td><td class="tri">91/120/0</td><td class="sq">81/120/1</td><td class="pent">100/120/0</td><td class="hex">81/120/1</td><td class="fib">81/120/0</td><td class="fib">64/120/1</td><td class="prime">89/120/11</td><td class="prime">97/120/0</td><td class="even">80/120/10</td><td class="even">120/120/11</td><td class="even">100/120/9</td><td class="even">85/120/10</td><td class="even">72/120/8</td><td class="even">108/120/9</td><td class="even">80/120/7</td><td class="even">120/120/8</td><td>120</td></tr>
+<tr><td>P15</td><td class="tri">105/120/1</td><td class="sq">64/120/2</td><td class="pent">81/120/1</td><td class="hex">64/120/2</td><td class="fib">64/120/1</td><td class="fib">49/120/2</td><td class="prime">101/120/0</td><td class="prime">103/120/1</td><td class="even">88/120/11</td><td class="even">120/120/0</td><td class="even">85/120/10</td><td class="even">70/120/11</td><td class="even">80/120/9</td><td class="even">120/120/10</td><td class="even">90/120/8</td><td class="even">120/120/9</td><td>120</td></tr>
+<tr><td>P16</td><td class="tri">120/120/2</td><td class="sq">49/120/3</td><td class="pent">64/120/2</td><td class="hex">49/120/3</td><td class="fib">49/120/2</td><td class="fib">36/120/3</td><td class="prime">107/120/1</td><td class="prime">109/120/2</td><td class="even">96/120/0</td><td class="even">120/120/1</td><td class="even">70/120/11</td><td class="even">60/120/0</td><td class="even">88/120/10</td><td class="even">120/120/11</td><td class="even">100/120/9</td><td class="even">120/120/10</td><td>120</td></tr>
+</table>
+
+<!-- BANK B: DANCE OF THE PRINCESSES & KHOROVOD -->
+<h2>BANK B: Dance of the Princesses (Khorovod)</h2>
+<h3>"Diatonic folk melodies - simple, human, earthly rhythm"</h3>
+<p class="section-note">Grounded patterns - even divisions dominate, sparse supernatural elements intrude</p>
+<table>
+<tr>
+<th>Pat</th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th><th>T8</th>
+<th>T9</th><th>T10</th><th>T11</th><th>T12</th><th>T13</th><th>T14</th><th>T15</th><th>T16</th><th>PL</th>
+</tr>
+<tr><td>P1</td><td class="even">8/24/0</td><td class="even">12/24/0</td><td class="even">16/32/0</td><td class="even">20/40/0</td><td class="even">24/48/0</td><td class="even">30/60/0</td><td class="even">40/80/0</td><td class="even">60/120/0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P2</td><td class="even">8/24/1</td><td class="even">12/24/1</td><td class="even">16/32/1</td><td class="even">20/40/1</td><td class="even">24/48/1</td><td class="even">30/60/1</td><td class="even">40/80/1</td><td class="even">60/120/1</td><td class="tri">3/15/0</td><td class="tri">6/21/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P3</td><td class="even">8/24/2</td><td class="even">12/24/2</td><td class="even">16/32/2</td><td class="even">20/40/2</td><td class="even">24/48/2</td><td class="even">30/60/2</td><td class="even">40/80/2</td><td class="even">60/120/2</td><td class="tri">6/21/1</td><td class="tri">10/28/2</td><td class="sq">4/16/0</td><td class="sq">9/25/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P4</td><td class="even">8/24/3</td><td class="even">12/24/3</td><td class="even">16/32/3</td><td class="even">20/40/3</td><td class="even">24/48/3</td><td class="even">30/60/3</td><td class="even">40/80/3</td><td class="even">60/120/3</td><td class="tri">10/28/2</td><td class="tri">15/36/3</td><td class="sq">9/25/1</td><td class="sq">16/36/2</td><td class="hex">6/18/0</td><td class="hex">15/33/1</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P5</td><td class="even">12/24/4</td><td class="even">16/32/4</td><td class="even">20/40/4</td><td class="even">24/48/4</td><td class="even">30/60/4</td><td class="even">36/72/4</td><td class="even">48/96/4</td><td class="even">72/120/4</td><td class="tri">15/36/3</td><td class="tri">21/45/4</td><td class="sq">16/36/2</td><td class="sq">25/49/3</td><td class="hex">15/33/1</td><td class="hex">28/48/2</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P6</td><td class="even">12/24/5</td><td class="even">16/32/5</td><td class="even">20/40/5</td><td class="even">24/48/5</td><td class="even">30/60/5</td><td class="even">36/72/5</td><td class="even">48/96/5</td><td class="even">72/120/5</td><td class="tri">21/45/4</td><td class="tri">28/55/5</td><td class="sq">25/49/3</td><td class="sq">36/64/4</td><td class="hex">28/48/2</td><td class="hex">45/63/3</td><td class="pent">12/29/0</td><td class="pent">22/41/1</td><td>120</td></tr>
+<tr><td>P7</td><td class="even">16/32/6</td><td class="even">20/40/6</td><td class="even">24/48/6</td><td class="even">30/60/6</td><td class="even">36/72/6</td><td class="even">40/80/6</td><td class="even">56/112/6</td><td class="even">84/120/6</td><td class="tri">28/55/5</td><td class="tri">36/66/6</td><td class="sq">36/64/4</td><td class="sq">49/81/5</td><td class="hex">45/63/3</td><td class="hex">66/81/4</td><td class="pent">22/41/1</td><td class="pent">35/53/2</td><td>120</td></tr>
+<tr><td>P8</td><td class="even">16/32/7</td><td class="even">20/40/7</td><td class="even">24/48/7</td><td class="even">30/60/7</td><td class="even">36/72/7</td><td class="even">40/80/7</td><td class="even">56/112/7</td><td class="even">84/120/7</td><td class="tri">36/66/6</td><td class="tri">45/78/7</td><td class="sq">49/81/5</td><td class="sq">64/100/6</td><td class="hex">66/81/4</td><td class="hex">91/99/5</td><td class="pent">35/53/2</td><td class="pent">51/67/3</td><td>120</td></tr>
+
+<tr><td colspan="18" style="background: #1a1a2e; height: 3px;"></td></tr>
+<tr><td>P9</td><td class="even">20/40/8</td><td class="even">24/48/8</td><td class="even">30/60/8</td><td class="even">36/72/8</td><td class="even">40/80/8</td><td class="even">48/96/8</td><td class="even">64/120/8</td><td class="even">96/120/8</td><td class="tri">45/78/7</td><td class="tri">55/91/8</td><td class="sq">64/100/6</td><td class="sq">81/121/7</td><td class="hex">91/99/5</td><td class="hex">120/120/6</td><td class="pent">51/67/3</td><td class="pent">70/83/4</td><td>120</td></tr>
+<tr><td>P10</td><td class="even">20/40/9</td><td class="even">24/48/9</td><td class="even">30/60/9</td><td class="even">36/72/9</td><td class="even">40/80/9</td><td class="even">48/96/9</td><td class="even">64/120/9</td><td class="even">96/120/9</td><td class="tri">55/91/8</td><td class="tri">66/105/9</td><td class="sq">81/121/7</td><td class="sq">100/120/8</td><td class="hex">120/120/6</td><td class="hex">120/120/7</td><td class="pent">70/83/4</td><td class="pent">92/101/5</td><td>120</td></tr>
+<tr><td>P11</td><td class="even">24/48/10</td><td class="even">30/60/10</td><td class="even">36/72/10</td><td class="even">40/80/10</td><td class="even">48/96/10</td><td class="even">56/112/10</td><td class="even">72/120/10</td><td class="even">108/120/10</td><td class="tri">66/105/9</td><td class="tri">78/120/10</td><td class="sq">100/120/8</td><td class="sq">120/120/9</td><td class="hex">120/120/7</td><td class="hex">117/120/8</td><td class="pent">92/101/5</td><td class="pent">117/120/6</td><td>120</td></tr>
+<tr><td>P12</td><td class="even">24/48/11</td><td class="even">30/60/11</td><td class="even">36/72/11</td><td class="even">40/80/11</td><td class="even">48/96/11</td><td class="even">56/112/11</td><td class="even">72/120/11</td><td class="even">108/120/11</td><td class="tri">78/120/10</td><td class="tri">91/120/11</td><td class="sq">120/120/9</td><td class="sq">117/120/10</td><td class="hex">117/120/8</td><td class="hex">100/120/9</td><td class="pent">117/120/6</td><td class="pent">120/120/7</td><td>120</td></tr>
+<tr><td>P13</td><td class="even">30/60/0</td><td class="even">36/72/0</td><td class="even">40/80/0</td><td class="even">48/96/0</td><td class="even">56/112/0</td><td class="even">64/120/0</td><td class="even">80/120/0</td><td class="even">120/120/0</td><td class="tri">91/120/11</td><td class="tri">105/120/0</td><td class="sq">117/120/10</td><td class="sq">100/120/11</td><td class="hex">100/120/9</td><td class="hex">81/120/10</td><td class="pent">120/120/7</td><td class="pent">117/120/8</td><td>120</td></tr>
+<tr><td>P14</td><td class="even">30/60/1</td><td class="even">36/72/1</td><td class="even">40/80/1</td><td class="even">48/96/1</td><td class="even">56/112/1</td><td class="even">64/120/1</td><td class="even">80/120/1</td><td class="even">120/120/1</td><td class="tri">105/120/0</td><td class="tri">120/120/1</td><td class="sq">100/120/11</td><td class="sq">81/120/0</td><td class="hex">81/120/10</td><td class="hex">64/120/11</td><td class="pent">117/120/8</td><td class="pent">100/120/9</td><td>120</td></tr>
+<tr><td>P15</td><td class="even">36/72/2</td><td class="even">40/80/2</td><td class="even">48/96/2</td><td class="even">56/112/2</td><td class="even">64/120/2</td><td class="even">72/120/2</td><td class="even">88/120/2</td><td class="even">120/120/2</td><td class="tri">120/120/1</td><td class="tri">117/120/2</td><td class="sq">81/120/0</td><td class="sq">64/120/1</td><td class="hex">64/120/11</td><td class="hex">49/120/0</td><td class="pent">100/120/9</td><td class="pent">81/120/10</td><td>120</td></tr>
+<tr><td>P16</td><td class="even">40/80/0</td><td class="even">48/96/0</td><td class="even">56/112/0</td><td class="even">64/120/0</td><td class="even">72/120/0</td><td class="even">80/120/0</td><td class="even">96/120/0</td><td class="even">120/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td>120</td></tr>
+</table>
+
+<!-- BANK C: BERCEUSE & INFERNAL DANCE -->
+<h2>BANK C: Berceuse (Lullaby) → Infernal Dance</h2>
+<h3>"From gentle hypnotic patterns to barbaric frenetic rhythms"</h3>
+<p class="section-note">Transition: calm ostinato → violent acceleration → exhaustion</p>
+<table>
+<tr>
+<th>Pat</th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th><th>T8</th>
+<th>T9</th><th>T10</th><th>T11</th><th>T12</th><th>T13</th><th>T14</th><th>T15</th><th>T16</th><th>PL</th>
+</tr>
+<tr><td>P1</td><td class="fib">3/21/0</td><td class="fib">5/34/1</td><td class="fib">8/55/2</td><td class="fib">13/89/3</td><td class="pent">5/17/0</td><td class="pent">12/29/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P2</td><td class="fib">5/34/1</td><td class="fib">8/55/2</td><td class="fib">13/89/3</td><td class="fib">21/120/4</td><td class="pent">12/29/1</td><td class="pent">22/41/2</td><td class="hex">6/18/0</td><td class="hex">15/33/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P3</td><td class="fib">8/55/2</td><td class="fib">13/89/3</td><td class="fib">21/120/4</td><td class="fib">34/120/5</td><td class="pent">22/41/2</td><td class="pent">35/53/3</td><td class="hex">15/33/1</td><td class="hex">28/48/2</td><td class="prime">3/23/0</td><td class="prime">5/29/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P4</td><td class="fib">13/89/3</td><td class="fib">21/120/4</td><td class="fib">34/120/5</td><td class="fib">55/120/6</td><td class="pent">35/53/3</td><td class="pent">51/67/4</td><td class="hex">28/48/2</td><td class="hex">45/63/3</td><td class="prime">7/31/1</td><td class="prime">11/37/2</td><td class="prime">13/41/0</td><td class="prime">17/43/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td colspan="18" style="background: #ff6b6b; height: 2px;"></td></tr>
+<tr><td>P5</td><td class="prime">19/47/3</td><td class="prime">23/53/4</td><td class="prime">29/59/5</td><td class="prime">31/61/6</td><td class="tri">10/28/4</td><td class="tri">15/36/5</td><td class="sq">16/36/4</td><td class="sq">25/49/5</td><td class="fib">34/120/5</td><td class="fib">55/120/6</td><td class="pent">51/67/4</td><td class="pent">70/83/5</td><td class="hex">45/63/3</td><td class="hex">66/81/4</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P6</td><td class="prime">37/67/6</td><td class="prime">41/71/7</td><td class="prime">43/73/8</td><td class="prime">47/79/9</td><td class="tri">21/45/6</td><td class="tri">28/55/7</td><td class="sq">36/64/6</td><td class="sq">49/81/7</td><td class="fib">55/120/6</td><td class="fib">89/120/7</td><td class="pent">70/83/5</td><td class="pent">92/101/6</td><td class="hex">66/81/4</td><td class="hex">91/99/5</td><td class="even">24/48/0</td><td class="even">36/72/1</td><td>120</td></tr>
+<tr><td>P7</td><td class="prime">53/83/9</td><td class="prime">59/89/10</td><td class="prime">61/97/11</td><td class="prime">67/101/0</td><td class="tri">36/66/8</td><td class="tri">45/78/9</td><td class="sq">64/100/8</td><td class="sq">81/121/9</td><td class="fib">89/120/7</td><td class="fib">120/120/8</td><td class="pent">92/101/6</td><td class="pent">117/120/7</td><td class="hex">91/99/5</td><td class="hex">120/120/6</td><td class="even">48/96/2</td><td class="even">72/120/3</td><td>120</td></tr>
+<tr><td>P8</td><td class="prime">71/103/1</td><td class="prime">73/107/2</td><td class="prime">79/109/3</td><td class="prime">83/113/4</td><td class="tri">55/91/10</td><td class="tri">66/105/11</td><td class="sq">100/120/10</td><td class="sq">121/120/11</td><td class="fib">120/120/8</td><td class="fib">117/120/9</td><td class="pent">117/120/7</td><td class="pent">120/120/8</td><td class="hex">120/120/6</td><td class="hex">153/120/7</td><td class="even">72/120/4</td><td class="even">108/120/5</td><td>120</td></tr>
+
+<tr><td colspan="18" style="background: #1a1a2e; height: 3px;"></td></tr>
+<tr><td>P9</td><td class="prime">89/120/5</td><td class="prime">97/120/6</td><td class="prime">101/120/7</td><td class="prime">103/120/8</td><td class="tri">78/120/0</td><td class="tri">91/120/1</td><td class="sq">119/120/0</td><td class="sq">120/120/1</td><td class="fib">117/120/9</td><td class="fib">100/120/10</td><td class="pent">120/120/8</td><td class="pent">140/120/9</td><td class="hex">153/120/7</td><td class="hex">190/120/8</td><td class="even">96/120/6</td><td class="even">120/120/7</td><td>120</td></tr>
+<tr><td>P10</td><td class="prime">107/120/9</td><td class="prime">109/120/10</td><td class="prime">113/120/11</td><td class="prime">117/120/0</td><td class="tri">105/120/2</td><td class="tri">120/120/3</td><td class="sq">117/120/2</td><td class="sq">100/120/3</td><td class="fib">100/120/10</td><td class="fib">81/120/11</td><td class="pent">140/120/9</td><td class="pent">145/120/10</td><td class="hex">190/120/8</td><td class="hex">231/120/9</td><td class="even">108/120/8</td><td class="even">120/120/9</td><td>120</td></tr>
+<tr><td>P11</td><td class="prime">119/120/1</td><td class="prime">113/120/2</td><td class="prime">107/120/3</td><td class="prime">101/120/4</td><td class="tri">117/120/4</td><td class="tri">105/120/5</td><td class="sq">100/120/4</td><td class="sq">81/120/5</td><td class="fib">81/120/11</td><td class="fib">64/120/0</td><td class="pent">145/120/10</td><td class="pent">165/120/11</td><td class="hex">231/120/9</td><td class="hex">276/120/10</td><td class="even">115/120/10</td><td class="even">120/120/11</td><td>120</td></tr>
+<tr><td>P12</td><td class="prime">97/120/5</td><td class="prime">89/120/6</td><td class="prime">83/120/7</td><td class="prime">79/120/8</td><td class="tri">100/120/6</td><td class="tri">91/120/7</td><td class="sq">81/120/6</td><td class="sq">64/120/7</td><td class="fib">64/120/0</td><td class="fib">49/120/1</td><td class="pent">165/120/11</td><td class="pent">176/120/0</td><td class="hex">276/120/10</td><td class="hex">325/120/11</td><td class="even">100/120/0</td><td class="even">115/120/1</td><td>120</td></tr>
+<tr><td>P13</td><td class="prime">73/120/9</td><td class="prime">71/120/10</td><td class="prime">67/120/11</td><td class="prime">61/120/0</td><td class="tri">81/120/8</td><td class="tri">78/120/9</td><td class="sq">64/120/8</td><td class="sq">49/120/9</td><td class="fib">49/120/1</td><td class="fib">36/120/2</td><td class="pent">176/120/0</td><td class="pent">187/120/1</td><td class="hex">325/120/11</td><td class="hex">378/120/0</td><td class="even">85/120/2</td><td class="even">100/120/3</td><td>120</td></tr>
+<tr><td>P14</td><td class="prime">59/120/1</td><td class="prime">53/120/2</td><td class="prime">47/120/3</td><td class="prime">43/120/4</td><td class="tri">64/120/10</td><td class="tri">55/120/11</td><td class="sq">49/120/10</td><td class="sq">36/120/11</td><td class="fib">36/120/2</td><td class="fib">25/120/3</td><td class="pent">187/120/1</td><td class="pent">195/120/2</td><td class="hex">378/120/0</td><td class="hex">435/120/1</td><td class="even">70/120/4</td><td class="even">85/120/5</td><td>120</td></tr>
+<tr><td>P15</td><td class="prime">41/120/5</td><td class="prime">37/120/6</td><td class="prime">31/120/7</td><td class="prime">29/120/8</td><td class="tri">49/120/0</td><td class="tri">36/120/1</td><td class="sq">36/120/0</td><td class="sq">25/120/1</td><td class="fib">25/120/3</td><td class="fib">16/120/4</td><td class="pent">195/120/2</td><td class="pent">200/120/3</td><td class="hex">435/120/1</td><td class="hex">496/120/2</td><td class="even">60/120/6</td><td class="even">70/120/7</td><td>120</td></tr>
+<tr><td>P16</td><td class="even">30/60/0</td><td class="even">30/60/0</td><td class="even">30/60/0</td><td class="even">30/60/0</td><td class="even">40/80/0</td><td class="even">40/80/0</td><td class="even">40/80/0</td><td class="even">40/80/0</td><td class="even">20/40/0</td><td class="even">20/40/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td class="even">60/120/0</td><td>120</td></tr>
+</table>
+
+<!-- BANK D: FINALE - HYMN OF TRIUMPH -->
+<h2>BANK D: Finale - Hymn of Triumph</h2>
+<h3>"Variations on folk melody - from darkness to triumphant dawn"</h3>
+<p class="section-note">Ascending intensity: soft horn solo → full orchestral apotheosis</p>
+<table>
+<tr>
+<th>Pat</th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th><th>T8</th>
+<th>T9</th><th>T10</th><th>T11</th><th>T12</th><th>T13</th><th>T14</th><th>T15</th><th>T16</th><th>PL</th>
+</tr>
+<tr><td>P1</td><td class="even">15/60/0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P2</td><td class="even">15/60/0</td><td class="even">20/80/1</td><td class="tri">3/15/0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P3</td><td class="even">20/80/1</td><td class="even">30/120/2</td><td class="tri">6/21/1</td><td class="sq">4/16/0</td><td class="fib">3/21/0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P4</td><td class="even">30/120/2</td><td class="even">40/120/3</td><td class="tri">10/28/2</td><td class="sq">9/25/1</td><td class="fib">5/34/1</td><td class="pent">5/17/0</td><td class="hex">6/18/0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P5</td><td class="even">40/120/3</td><td class="even">50/120/4</td><td class="tri">15/36/3</td><td class="sq">16/36/2</td><td class="fib">8/55/2</td><td class="pent">12/29/1</td><td class="hex">15/33/1</td><td class="prime">7/31/0</td><td class="even">24/48/0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P6</td><td class="even">50/120/4</td><td class="even">60/120/5</td><td class="tri">21/45/4</td><td class="sq">25/49/3</td><td class="fib">13/89/3</td><td class="pent">22/41/2</td><td class="hex">28/48/2</td><td class="prime">13/41/1</td><td class="even">36/72/1</td><td class="even">48/96/0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P7</td><td class="even">60/120/5</td><td class="even">70/120/6</td><td class="tri">28/55/5</td><td class="sq">36/64/4</td><td class="fib">21/120/4</td><td class="pent">35/53/3</td><td class="hex">45/63/3</td><td class="prime">19/47/2</td><td class="even">48/96/1</td><td class="even">60/120/2</td><td class="even">72/120/0</td><td class="even">84/120/1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>120</td></tr>
+<tr><td>P8</td><td class="even">70/120/6</td><td class="even">80/120/7</td><td class="tri">36/66/6</td><td class="sq">49/81/5</td><td class="fib">34/120/5</td><td class="pent">51/67/4</td><td class="hex">66/81/4</td><td class="prime">29/59/3</td><td class="even">60/120/2</td><td class="even">72/120/3</td><td class="even">84/120/1</td><td class="even">96/120/2</td><td class="even">40/80/0</td><td class="even">50/100/1</td><td>-</td><td>-</td><td>120</td></tr>
+
+<tr><td colspan="18" style="background: #1a1a2e; height: 3px;"></td></tr>
+<tr><td>P9</td><td class="even">80/120/7</td><td class="even">90/120/8</td><td class="tri">45/78/7</td><td class="sq">64/100/6</td><td class="fib">55/120/6</td><td class="pent">70/83/5</td><td class="hex">91/99/5</td><td class="prime">37/67/4</td><td class="even">72/120/3</td><td class="even">84/120/4</td><td class="even">96/120/2</td><td class="even">108/120/3</td><td class="even">50/100/1</td><td class="even">60/120/2</td><td class="even">70/120/0</td><td class="even">80/120/1</td><td>120</td></tr>
+<tr><td>P10</td><td class="even">90/120/8</td><td class="even">100/120/9</td><td class="tri">55/91/8</td><td class="sq">81/121/7</td><td class="fib">89/120/7</td><td class="pent">92/101/6</td><td class="hex">120/120/6</td><td class="prime">43/73/5</td><td class="even">84/120/4</td><td class="even">96/120/5</td><td class="even">108/120/3</td><td class="even">120/120/4</td><td class="even">60/120/2</td><td class="even">70/120/3</td><td class="even">80/120/1</td><td class="even">90/120/2</td><td>120</td></tr>
+<tr><td>P11</td><td class="even">100/120/9</td><td class="even">110/120/10</td><td class="tri">66/105/9</td><td class="sq">100/120/8</td><td class="fib">120/120/8</td><td class="pent">117/120/7</td><td class="hex">153/120/7</td><td class="prime">53/83/6</td><td class="even">96/120/5</td><td class="even">108/120/6</td><td class="even">120/120/4</td><td class="even">120/120/5</td><td class="even">70/120/3</td><td class="even">80/120/4</td><td class="even">90/120/2</td><td class="even">100/120/3</td><td>120</td></tr>
+<tr><td>P12</td><td class="even">110/120/10</td><td class="even">120/120/11</td><td class="tri">78/120/10</td><td class="sq">121/120/9</td><td class="fib">117/120/9</td><td class="pent">120/120/8</td><td class="hex">190/120/8</td><td class="prime">61/97/7</td><td class="even">108/120/6</td><td class="even">120/120/7</td><td class="even">120/120/5</td><td class="even">120/120/6</td><td class="even">80/120/4</td><td class="even">90/120/5</td><td class="even">100/120/3</td><td class="even">110/120/4</td><td>120</td></tr>
+<tr><td>P13</td><td class="even">120/120/11</td><td class="even">120/120/0</td><td class="tri">91/120/11</td><td class="sq">120/120/10</td><td class="fib">100/120/10</td><td class="pent">140/120/9</td><td class="hex">231/120/9</td><td class="prime">71/103/8</td><td class="even">120/120/7</td><td class="even">120/120/8</td><td class="even">120/120/6</td><td class="even">120/120/7</td><td class="even">90/120/5</td><td class="even">100/120/6</td><td class="even">110/120/4</td><td class="even">120/120/5</td><td>120</td></tr>
+<tr><td>P14</td><td class="even">120/120/0</td><td class="even">120/120/1</td><td class="tri">105/120/0</td><td class="sq">117/120/11</td><td class="fib">81/120/11</td><td class="pent">145/120/10</td><td class="hex">276/120/10</td><td class="prime">83/113/9</td><td class="even">120/120/8</td><td class="even">120/120/9</td><td class="even">120/120/7</td><td class="even">120/120/8</td><td class="even">100/120/6</td><td class="even">110/120/7</td><td class="even">120/120/5</td><td class="even">120/120/6</td><td>120</td></tr>
+<tr><td>P15</td><td class="even">120/120/1</td><td class="even">120/120/2</td><td class="tri">120/120/1</td><td class="sq">100/120/0</td><td class="fib">64/120/0</td><td class="pent">165/120/11</td><td class="hex">325/120/11</td><td class="prime">97/120/10</td><td class="even">120/120/9</td><td class="even">120/120/10</td><td class="even">120/120/8</td><td class="even">120/120/9</td><td class="even">110/120/7</td><td class="even">120/120/8</td><td class="even">120/120/6</td><td class="even">120/120/7</td><td>120</td></tr>
+<tr><td>P16</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td class="even">120/120/0</td><td>120</td></tr>
+</table>
+
+<div class="legend">
+<strong>POLYGONAL NUMBER SYSTEMS:</strong><br>
+<span class="tri">■ TRI</span> = Triangular (1,3,6,10,15,21,28,36,45,55,66,78,91,105,120...) | 
+<span class="sq">■ SQ</span> = Square (1,4,9,16,25,36,49,64,81,100,121...) | 
+<span class="pent">■ PENT</span> = Pentagonal (1,5,12,22,35,51,70,92,117,145,176...) | 
+<span class="hex">■ HEX</span> = Hexagonal (1,6,15,28,45,66,91,120,153,190,231,276,325,378,435,496...)<br>
+<span class="fib">■ FIB</span> = Fibonacci (1,2,3,5,8,13,21,34,55,89,144...) | 
+<span class="prime">■ PRIME</span> = Prime numbers (3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113...) | 
+<span class="even">■ EVEN</span> = Equal divisions of 120
+<br><br>
+<strong>COMPOSITIONAL STRUCTURE:</strong><br>
+<strong>Bank A:</strong> Mysterious introduction building polymorphic complexity (sparse → dense)<br>
+<strong>Bank B:</strong> Human folk dance - diatonic, grounded, with supernatural intrusions<br>
+<strong>Bank C:</strong> Berceuse (hypnotic ostinato) transforming into Infernal Dance (barbaric frenzy) → exhaustion<br>
+<strong>Bank D:</strong> Triumphant finale - variations ascending from solo to full orchestral apotheosis<br>
+<br>
+<em>"- " = Track silent/inactive</em>
+</div>
+</div>
+</body>
+</html>

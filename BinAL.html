@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonant Bodies: File Size, Segment Structure & Sonic Frequency</title>
+    <style>
+        body { 
+            font-family: 'Georgia', serif; 
+            line-height: 1.75; 
+            color: #222; 
+            background: #0f0a05; 
+            max-width: 980px; 
+            margin: 40px auto; 
+            padding: 30px; 
+            color: #e8d9c0;
+        }
+        h1, h2, h3 { 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
+            color: #ffcc66; 
+        }
+        h1 { 
+            font-size: 2.8em; 
+            border-bottom: 4px solid #ff9900; 
+            padding-bottom: 15px; 
+            letter-spacing: -2px;
+        }
+        h2 { 
+            color: #ffaa33; 
+            border-bottom: 1px solid #664422; 
+            padding-bottom: 8px;
+        }
+        pre { 
+            background: #1a1208; 
+            padding: 18px; 
+            border: 1px solid #664422; 
+            border-radius: 6px; 
+            overflow-x: auto; 
+            font-family: 'Courier New', monospace; 
+            color: #ffdd99;
+        }
+        .highlight { 
+            background: #331100; 
+            padding: 20px; 
+            border-left: 6px solid #ff9900; 
+            margin: 25px 0;
+        }
+        ul, ol { 
+            padding-left: 28px; 
+        }
+        .note { 
+            font-style: italic; 
+            color: #bb9977; 
+            border: 1px dashed #664422; 
+            padding: 12px;
+        }
+        .section-title {
+            color: #ffcc88;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Resonant Bodies<br>File Size • Segment Structure • Sonic Frequency</h1>
+        <p><em>Second movement in the Binary Digestion series</em></p>
+        <p>How the physical and logical dimensions of a binary file — its size, segments, and internal architecture — can be translated into audible frequencies, resonances, and evolving sonic organisms.</p>
+    </header>
+
+    <section>
+        <h2>The File as a Resonant Body</h2>
+        <p>Every binary file possesses a measurable <strong>body</strong>: its total size in bytes, the distribution of its segments, and the density of data within those segments. These physical properties are not merely technical metadata — they are acoustic potentials waiting to be awakened.</p>
+        
+        <p>In this sonic digestion framework, file size and segment structure become the foundation for frequency-based music generation. Larger segments can oscillate at lower frequencies, denser regions produce higher partials, and the overall file size determines the fundamental tone or the duration of the entire composition.</p>
+    </section>
+
+    <section>
+        <h2>Core Sonic Mappings: From Bytes to Frequencies</h2>
+        
+        <div class="highlight">
+            <h3>Fundamental Principles</h3>
+            <ul>
+                <li><strong>Total File Size</strong> → determines the base frequency (fundamental) or the total duration of the piece.</li>
+                <li><strong>Segment / Section Size</strong> → maps directly to oscillator frequencies or filter cutoffs.</li>
+                <li><strong>Segment Offset</strong> → controls phase, delay time, or panning position.</li>
+                <li><strong>Data Density & Entropy</strong> → influences harmonic richness and spectral brightness.</li>
+                <li><strong>Number of Segments</strong> → defines polyphony (how many simultaneous voices).</li>
+            </ul>
+        </div>
+
+        <h3>Common Frequency Mapping Strategies</h3>
+        <ol>
+            <li><strong>Linear Mapping</strong><br>
+                Frequency (Hz) = Base + (segment_size / total_size) × Range<br>
+                Example: A 64 KB segment in a 1 MB file might generate ~440 Hz (A4) while a 512 KB segment produces a deep sub-bass.
+            </li>
+            <li><strong>Logarithmic / Musical Scaling</strong><br>
+                Map byte sizes to MIDI notes or just intonation ratios. Large code segments become low drones; small symbol tables become high tinkling bells.
+            </li>
+            <li><strong>Harmonic Series</strong><br>
+                Treat segment sizes as multiples of a fundamental frequency derived from the file’s total size or magic number.
+            </li>
+            <li><strong>Granular Frequency</strong><br>
+                Small segments (under 4 KB) become grains whose playback rate equals their offset or size in Hz.
+            </li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Segment Structure as Orchestral Sections</h2>
+        <p>Binary files are rarely monolithic. They are divided into segments and sections, each with its own acoustic personality:</p>
+        
+        <table style="width:100%; border-collapse:collapse; margin:25px 0; background:#1a1208;">
+            <tr style="background:#331100;">
+                <th style="padding:12px; text-align:left; border:1px solid #664422;">Segment / Section Type</th>
+                <th style="padding:12px; text-align:left; border:1px solid #664422;">Typical Size Behavior</th>
+                <th style="padding:12px; text-align:left; border:1px solid #664422;">Sonic Interpretation</th>
+            </tr>
+            <tr>
+                <td style="padding:12px; border:1px solid #664422;">.text / __TEXT (code)</td>
+                <td style="padding:12px; border:1px solid #664422;">Medium to large, consistent</td>
+                <td style="padding:12px; border:1px solid #664422;">Main melodic voice or harmonic drone</td>
+            </tr>
+            <tr>
+                <td style="padding:12px; border:1px solid #664422;">.data / __DATA (initialized data)</td>
+                <td style="padding:12px; border:1px solid #664422;">Variable, often medium</td>
+                <td style="padding:12px; border:1px solid #664422;">Rhythmic or textural layer</td>
+            </tr>
+            <tr>
+                <td style="padding:12px; border:1px solid #664422;">.bss / NOBITS (uninitialized)</td>
+                <td style="padding:12px; border:1px solid #664422;">Large but zero-filled (low entropy)</td>
+                <td style="padding:12px; border:1px solid #664422;">Pure sine tones or sub-bass resonance</td>
+            </tr>
+            <tr>
+                <td style="padding:12px; border:1px solid #664422;">.symtab / symbol table</td>
+                <td style="padding:12px; border:1px solid #664422;">Small to medium, dense pointers</td>
+                <td style="padding:12px; border:1px solid #664422;">Percussive clicks or high-frequency metallic tones</td>
+            </tr>
+            <tr>
+                <td style="padding:12px; border:1px solid #664422;">Raw / unknown chunks</td>
+                <td style="padding:12px; border:1px solid #664422;">Arbitrary</td>
+                <td style="padding:12px; border:1px solid #664422;">Granular cloud or noise bursts</td>
+            </tr>
+        </table>
+
+        <p class="note">The relative proportion of each segment within the whole file creates a unique spectral fingerprint — a sonic signature unique to that binary organism.</p>
+    </section>
+
+    <section>
+        <h2>Practical Sonic Adaptation Techniques</h2>
+        
+        <h3>1. Frequency from Segment Size</h3>
+        <pre><code>// Conceptual mapping (not executable code)
+baseFreq = 55;                    // A1 as fundamental
+freq     = baseFreq * (segment.size / totalSize * 8 + 1);
+</code></pre>
+        <p>This produces a natural harmonic spread: larger segments sound deeper, smaller ones higher.</p>
+
+        <h3>2. Multi-Voice Polyphony from Number of Segments</h3>
+        <p>If a file contains 12 segments, spawn 12 parallel oscillators or voices. Each voice’s frequency is derived from its segment’s relative size, while its amplitude follows the segment’s entropy.</p>
+
+        <h3>3. Temporal Structure from Offsets and Sizes</h3>
+        <ul>
+            <li>Segment offset → delay time or onset (in milliseconds or beats)</li>
+            <li>Segment size → note duration or loop length</li>
+            <li>Distance between segments → rhythmic gaps or polyrhythms</li>
+        </ul>
+
+        <h3>4. Spectral Content from Internal Data</h3>
+        <p>Within each segment:</p>
+        <ul>
+            <li>High entropy regions → rich, noisy harmonics or FM modulation depth</li>
+            <li>Low entropy (repetitive bytes) → clean sine waves or resonant filters</li>
+            <li>Byte value (0–255) → modulates frequency deviation or filter Q</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Advanced Resonance Ideas</h2>
+        <ul>
+            <li><strong>File Size as Macro Duration</strong>: A 4 MB binary becomes a 4-minute piece; each 64 KB block equals one second.</li>
+            <li><strong>Self-Similar Fractal Mapping</strong>: Recursively analyze sub-segments so that smaller structures influence micro-variations inside longer tones.</li>
+            <li><strong>Physical Modeling</strong>: Treat the entire file as a vibrating string or membrane whose length = total size and tension = average entropy.</li>
+            <li><strong>Inter-File Harmony</strong>: Load multiple binaries simultaneously; their segment sizes create consonant or dissonant interval relationships.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Integration with the Universal Digestion Schema</h2>
+        <p>The previously defined schema already contains all necessary elements:</p>
+        <ul>
+            <li><code>metadata.size</code> and <code>metadata.entropy</code> set global pitch and brightness.</li>
+            <li><code>structures.segments[]</code> provides offset, size, and type for individual frequency voices.</li>
+            <li><code>structures.groups</code> routes different segment types to different synthesis engines (logical → melodic, physical → bass, mechanical → percussion).</li>
+        </ul>
+        <p class="note">In Max/MSP this data flows naturally into <code>poly~</code>, <code>cycle~</code>, <code>groove~</code>, <code>reson~</code>, or granular engines, turning the binary’s anatomy into a living, frequency-rich soundscape.</p>
+    </section>
+
+    <footer>
+        <p><strong>Resonant Bodies</strong> — listening to the hidden frequencies within binary structure.</p>
+        <p>Part of the Binary Digestion artistic framework • March 2026</p>
+    </footer>
+
+</body>
+</html>

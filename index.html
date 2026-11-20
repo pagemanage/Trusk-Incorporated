@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trusk Incorporated</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000; --fg:#fff; --muted:#9b9b9b;
+    --violet:#9b7cff; --signal:#ff5a1f;
+    --display:'Anton','Impact','Haettenschweiler','Arial Narrow Bold',sans-serif;
+    --body:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);}
+  body{min-height:100vh;overflow-x:hidden;}
+  /* faint tape scanlines */
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+    background:repeating-linear-gradient(to bottom,rgba(255,255,255,.025) 0 1px,transparent 1px 3px);}
+  a{color:inherit}
+
+  .page{max-width:1240px;margin:0 auto;padding:clamp(18px,3vw,36px) clamp(16px,3vw,40px) 60px;}
+
+  /* ---------- Masthead ---------- */
+  .mast{display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,2.4vw,34px);align-items:stretch;}
+  .pill{border:clamp(4px,.55vw,7px) solid var(--violet);border-radius:999px;color:var(--violet);
+        display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1em;
+        padding:clamp(14px,2vw,26px) clamp(10px,1.4vw,18px);font-family:var(--body);font-weight:600;
+        font-size:clamp(26px,4.4vw,58px);line-height:.95;}
+  .pill span{display:block}
+  .pill .dot{width:.18em;height:.18em;background:var(--violet);border-radius:50%;margin:.12em 0;}
+  .word{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.8;margin:0;
+        font-size:clamp(92px,23.5vw,330px);letter-spacing:-.005em;white-space:nowrap;
+        padding-top:.04em;}
+  .tag{font-family:var(--display);text-transform:uppercase;font-size:clamp(22px,3vw,40px);letter-spacing:.02em;margin:.35em 0 0;color:var(--fg);}
+
+  /* ---------- Body grid ---------- */
+  .grid{display:grid;grid-template-columns:minmax(200px,1fr) minmax(320px,1.6fr) minmax(240px,1.05fr);gap:clamp(22px,3.4vw,52px);margin-top:clamp(28px,4vw,52px);}
+  .about p{margin:0 0 14px;font-size:16px;line-height:1.5;}
+  .about p.lead{font-size:18px;font-weight:500;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+  .chip{border:1.5px solid var(--fg);border-radius:999px;padding:4px 12px;font-size:14px;}
+  .clock{margin-top:26px;font-size:14px;color:var(--muted);}
+  .clock b{display:block;font-family:var(--display);font-weight:400;font-size:40px;color:var(--fg);letter-spacing:.02em;line-height:1;margin-top:4px;}
+
+  /* ---------- Link boxes ---------- */
+  .links{display:flex;flex-direction:column;gap:14px;margin:0;padding:0;list-style:none;}
+  .box{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 18px;text-decoration:none;
+       border:2px solid var(--fg);padding:16px 20px 15px;position:relative;
+       transition:background-color .16s ease,color .16s ease,border-color .16s ease,transform .16s ease;}
+  .kick{grid-column:1;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);transition:color .16s ease;}
+  .box:hover .kick,.box:focus-visible .kick{color:#000;}
+  .box h2{grid-column:1;margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;
+          font-size:clamp(38px,4.6vw,62px);line-height:.92;letter-spacing:.005em;}
+  .box p{grid-column:1;margin:0;font-size:15px;line-height:1.4;color:var(--muted);transition:color .16s ease;}
+  .box svg{grid-column:2;grid-row:1 / span 3;width:clamp(40px,4.4vw,60px);height:auto;transition:transform .2s ease;}
+  .box:hover,.box:focus-visible{background:var(--signal);border-color:var(--signal);color:#000;outline:none;transform:translateX(4px);}
+  .box:hover p,.box:focus-visible p{color:#000;}
+  .box:hover svg,.box:focus-visible svg{transform:translate(4px,-4px);}
+  .box:active{transform:translateX(2px) scale(.995);}
+
+  /* ---------- Programme list ---------- */
+  .prog h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(40px,4.4vw,60px);line-height:.92;margin:0 0 18px;}
+  .prog ul{list-style:none;margin:0;padding:0;}
+  .prog li{display:flex;justify-content:space-between;gap:14px;border-bottom:1.5px solid var(--fg);padding:13px 0 12px;font-size:15px;}
+  .prog li b{font-weight:600;}
+  .prog li span{color:var(--muted);white-space:nowrap;}
+
+  /* ---------- Side tab ---------- */
+  .tab{position:fixed;right:0;bottom:0;background:var(--signal);color:#000;writing-mode:vertical-rl;
+       font-weight:600;font-size:15px;padding:16px 10px;letter-spacing:.02em;z-index:10;text-decoration:none;}
+  .tab::after{content:"\2199";display:block;margin-top:14px;font-size:22px;writing-mode:horizontal-tb;}
+
+  .av{margin-top:clamp(44px,6vw,80px);border-top:2px solid var(--fg);padding-top:22px;}
+  .av-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:16px;}
+  .av-head h2{margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(56px,9vw,130px);line-height:.85;}
+  .av .kick{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);order:2;}
+  .av-frame{border:2px solid var(--fg);padding:8px;background:#000;transition:border-color .16s ease;}
+  .av-frame:hover{border-color:var(--signal);}
+  .av video{display:block;width:100%;height:auto;background:#000;aspect-ratio:16/9;}
+  .av-desc{max-width:720px;font-size:18px;line-height:1.5;margin:16px 0 0;}
+  footer{margin-top:56px;border-top:1.5px solid #333;padding-top:16px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:980px){
+    .grid{grid-template-columns:1fr 1fr;}
+    .linkcol{grid-column:1 / -1;order:-1;}
+  }
+  @media (max-width:640px){
+    .grid{grid-template-columns:1fr;}
+    .word{font-size:clamp(70px,24vw,200px);}
+    .tab{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="mast">
+    <div class="pill" aria-hidden="true"><span>T</span><span class="dot"></span><span>I</span></div>
+    <div>
+      <h1 class="word">Trusk</h1>
+      <p class="tag">Incorporated — research institute</p>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="about" aria-label="About">
+      <p class="lead">Trusk Incorporated is a research institute. This is its entrance.</p>
+      <p>Below are some of the tools we use for research on the web: instruments for reading the sky, for counting the numbers hidden in words, and for tracing the correspondences between the planets, the fixed stars and the things of the earth. Each one opens on its own page.</p>
+      <div class="chips"><span class="chip">Research institute</span><span class="chip">Web tools</span><span class="chip">Timișoara</span></div>
+      <div class="clock">Local time, Timișoara<b id="clock">--:--</b></div>
+    </section>
+
+    <section class="linkcol" aria-label="Tools">
+      <ul class="links">
+        <li><a class="box" href="zodiac.html">
+          <span class="kick">Zodiac</span>
+          <h2>Speculum Coeli</h2>
+          <p>Fixed on Timișoara. Check the permutations and relations of the sky objects as they stand, minute by minute.</p>
+          <svg viewBox="0 0 60 60" aria-hidden="true"><path d="M8 52 L50 10 M20 10 H50 V40" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square"/></svg>
+        </a></li>
+        <li><a class="box" href="topogematrica.html">
+          <span class="kick">Gematria</span>
+          <h2>Dijkstra Pathfinder</h2>
+          <p>A gematric tool that calculates the number of a word.</p>
+          <svg viewBox="0 0 60 60" aria-hidden="true"><path d="M8 52 L50 10 M20 10 H50 V40" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square"/></svg>
+        </a></li>
+        <li><a class="box" href="perfectum.html">
+          <span class="kick">Starlibrary</span>
+          <h2>Startree</h2>
+          <p>The properties, virtues, stones, herbs, plants, metals, animals, body parts and operations of our solar system and of the Behenian fixed stars.</p>
+          <svg viewBox="0 0 60 60" aria-hidden="true"><path d="M8 52 L50 10 M20 10 H50 V40" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square"/></svg>
+        </a></li>
+        <li><a class="box" href="https://www.facebook.com/profile.php?id=100091523164162" target="_blank" rel="noopener">
+          <span class="kick">Facebook</span>
+          <h2>Trusk Inc.</h2>
+          <p>The Incorporated web archive.</p>
+          <svg viewBox="0 0 60 60" aria-hidden="true"><path d="M8 52 L50 10 M20 10 H50 V40" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square"/></svg>
+        </a></li>
+      </ul>
+    </section>
+
+    <section class="prog" aria-label="Index">
+      <h3>Index of<br>instruments</h3>
+      <ul>
+        <li><b>Speculum Coeli</b><span>Sky</span></li>
+        <li><b>Dijkstra Pathfinder</b><span>Number</span></li>
+        <li><b>Startree</b><span>Correspondence</span></li>
+        <li><b>Trusk Inc.</b><span>Archive</span></li>
+        <li><b>Starcore</b><span>Audiovideo</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <section class="av" aria-label="Starcore">
+    <div class="av-head">
+      <span class="kick">Audiovideo</span>
+      <h2>Starcore</h2>
+    </div>
+    <div class="av-frame">
+      <video controls playsinline preload="metadata">
+        <source src="starcore.mp4" type="video/mp4">
+        <source src="starcore.mov" type="video/quicktime">
+        <source src="starcore.mov">
+        Your browser cannot play this video. <a href="starcore.mov">Download starcore.mov</a>.
+      </video>
+    </div>
+    <p class="av-desc">We are living inside the Sun and are watching the engine of the Sun, which is actually its core. Thus it is hollow.</p>
+  </section>
+
+  <footer><span>© <span id="yr">2026</span> Trusk Incorporated</span><span>Tools of research on the web</span></footer>
+</div>
+
+<a class="tab" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Trusk Inc.</a>
+
+<script>
+  const fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Bucharest',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+  const tick=()=>{document.getElementById('clock').textContent=fmt.format(new Date());};
+  tick();setInterval(tick,15000);
+  document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trusk incorporated us</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            background: radial-gradient(circle at 50% 30%, 
+                rgba(255,255,255,0.25), 
+                rgba(10,120,220,0.35), 
+                rgba(180,20,220,0.25));
+            color: #111;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+        }
+
+        .keys-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .key-box {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border: 8px solid #111111;
+            padding: 25px;
+            box-shadow: 12px 12px 0 #111111;
+        }
+
+        .key-box h2 {
+            margin: 0 0 15px 0;
+            font-size: 1.5rem;
+            border-bottom: 4px solid #111;
+            padding-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 380px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13.5px;
+            line-height: 1.45;
+            padding: 18px;
+            border: 4px solid #111111;
+            background: #f9f9f9;
+            resize: none;
+            overflow: auto;
+        }
+
+        .meta {
+            margin-top: 30px;
+            background: #f0f0f0;
+            border: 6px solid #111111;
+            padding: 20px;
+            font-size: 1.05rem;
+        }
+
+        .copy-btn {
+            background: #111111;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            cursor: pointer;
+            box-shadow: 6px 6px 0 #111;
+        }
+
+        .copy-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0 #111;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>trusk incorporated us</h1>
+
+        <div class="keys-container">
+            
+            <!-- Private Key -->
+            <div class="key-box">
+                <h2>🔒 PRIVATE KEY (vbrkey)</h2>
+                <textarea readonly>-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC... (your private key here)
+-----END PRIVATE KEY-----</textarea>
+                <button class="copy-btn" onclick="navigator.clipboard.writeText(this.previousElementSibling.value); alert('Private key copied!')">📋 Copy Private Key</button>
+            </div>
+
+            <!-- Public Key -->
+            <div class="key-box">
+                <h2>🔑 PUBLIC KEY (vprkey)</h2>
+                <textarea readonly>-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA... (your public key here)
+-----END PUBLIC KEY-----</textarea>
+                <button class="copy-btn" onclick="navigator.clipboard.writeText(this.previousElementSibling.value); alert('Public key copied!')">📋 Copy Public Key</button>
+            </div>
+
+        </div>
+
+        <div class="meta">
+            <strong>Source:</strong> default string "checked" (when pc buffer is empty)<br>
+            <strong>SHA256:</strong> 3cbc87c7681f34db4617feaa2c8801931bc5e42d8d0f560e756dd4cd92885f18<br>
+            <strong>Generated:</strong> 2026-04-04 18:45:00 EEST<br>
+            <strong>Note:</strong> Replace the placeholder text inside the textareas with your actual generated keys.
+        </div>
+    </div>
+
+</body>
+</html>
